@@ -1,4 +1,4 @@
 import "./homePage.css";
 import { useEffect, useState } from "react";
-import * as icons from '../../img/icons';
+import * as icons from '../../img/icon';
 
