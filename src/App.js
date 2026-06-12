@@ -1,24 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Footer from './components/footer/footer';
+import HomePage from './components/homePage/homePage';
+import Header from './components/header/header';
+import StPage from './components/stPage/stPage';
+import TouPage from './components/touPage/touPage';
 
+function AppContent() {
+  //чут чут перелопаченный контент
+  return (
+    <div className="app-wrapper">
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </main>
+
+    </div>
+  );
+}
+// Маршрутка теперь вот тут
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 
