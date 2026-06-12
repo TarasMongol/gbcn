@@ -1,8 +1,10 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import footer from './components/footer/footer';
-import homePage from './components/homePage/homePage';
-import header from './components/header/header';
+import Footer from './components/footer/footer';
+import HomePage from './components/homePage/homePage';
+import Header from './components/header/header';
+import StPage from './components/stPage/stPage';
+import TouPage from './components/touPage/touPage';
 
 function AppContent() {
   //чут чут перелопаченный контент
@@ -10,7 +12,7 @@ function AppContent() {
     <div className="app-wrapper">
       <main className="main-content">
         <Routes>
-          <Route path="/" element={<homePage />} />
+          <Route path="/" element={<HomePage />} />
         </Routes>
       </main>
 

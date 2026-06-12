@@ -1,5 +1,5 @@
 import React from 'react';
-import './gbcSt.css';
+import './stPage.css';
 
 const sections = [
   {
@@ -167,7 +167,7 @@ const sections = [
   }
 ];
 
-function GbcSt() {
+function StPage() {
   return (
     <div className="gbc-st-page-wrapper">
       <div className="gbc-st-document-container">
@@ -208,4 +208,4 @@ function GbcSt() {
   );
 }
 
-export default GbcSt;
+export default StPage;
