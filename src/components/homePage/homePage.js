@@ -411,11 +411,11 @@ const cardNewsIntervalTwo = [
 
 const globalDefNews = [
   {
-  icon: icons.iconNATO,
-  title: 'NATO Strengthens Eastern Defense',
-  description: 'The North Atlantic Treaty Organization (NATO) announced a series of military exercises across Eastern Europe aimed at improving readiness and cooperation among allied forces. Officials stated that the drills are designed to enhance collective defense capabilities and ensure regional stability. Member states continue to invest in modern defense systems, cybersecurity, and rapid-response units. NATO leaders emphasized that cooperation between allies remains essential in addressing emerging security challenges and maintaining peace across the Euro-Atlantic region.',
-  publicAndType: 'June 2026 | International Affairs',
-  iconType: icons.iconNATOTWO
+    icon: icons.iconNATO,
+    title: 'NATO Strengthens Eastern Defense',
+    description: 'The North Atlantic Treaty Organization (NATO) announced a series of military exercises across Eastern Europe aimed at improving readiness and cooperation among allied forces. Officials stated that the drills are designed to enhance collective defense capabilities and ensure regional stability. Member states continue to invest in modern defense systems, cybersecurity, and rapid-response units. NATO leaders emphasized that cooperation between allies remains essential in addressing emerging security challenges and maintaining peace across the Euro-Atlantic region.',
+    publicAndType: 'June 2026 | International Affairs',
+    iconType: icons.iconNATOTWO
   }
 ];
 
@@ -489,6 +489,16 @@ function HomePage() {
   const Card = ({ icon, title, description, publicAndType, className, iconClass }) => (
     <div className={className}>
       {icon && <img src={icon} className={iconClass} alt={title} />}
+      <h3 className="titleCard">{title}</h3>
+      <p className="discriptionCard">{description}</p>
+      <p className="publicAndTypeCard">{publicAndType}</p>
+    </div>
+  );
+
+  const CardType = ({ icon, title, type, description, publicAndType, className, iconClass }) => (
+    <div className={className}>
+      {icon && <img src={icon} className={iconClass} alt={title} />}
+      <h3 className="typeCard">{type}</h3>
       <h3 className="titleCard">{title}</h3>
       <p className="discriptionCard">{description}</p>
       <p className="publicAndTypeCard">{publicAndType}</p>
@@ -675,6 +685,24 @@ function HomePage() {
           <div className="cardGlobalDefNewsContainer">
             {globalDefNews.map(({ id, ...props }) => (
               <CardOOH key={id} {...props} className="miniCardBody" iconClass="iconCard" />
+            ))}
+          </div>
+        </section>
+      </div>
+      <div className="newsType">
+        <section className="cardNewsType">
+          <div className="cardNewsTypeContainer">
+            {newsNewType.map(({ id, ...props }) => (
+              <CardType key={id} {...props} className="miniCardBody" iconClass="iconCard" />
+            ))}
+          </div>
+        </section>
+      </div>
+      <div className="newsBlue">
+        <section className="cardBlue">
+          <div className="cardBlueContainer">
+            {newsBlue.map(({ id, ...props }) => (
+              <Card key={id} {...props} className="miniCardBody" iconClass="iconCard" />
             ))}
           </div>
         </section>
