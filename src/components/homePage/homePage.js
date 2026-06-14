@@ -1,6 +1,5 @@
 import "./homePage.css";
 import React from 'react';
-import { useEffect, useState } from "react";
 import * as icons from '../../img/icons';
 
 const cardNewsHed = [
@@ -14,7 +13,7 @@ const cardNewsHed = [
   {
     id: 2,
     icon: icons.iconFurute,
-    title: 'Future of Artifical Intelligence',
+    title: 'Future of Artificial Intelligence',
     description: 'Experts discuss the growing role of AI in education, healthcare, and business at international technology events.',
     publicAndType: '35 mins ago | Business'
   },
@@ -24,7 +23,8 @@ const cardNewsHed = [
 const cardNewsHedBig = [
   {
     icon: icons.iconNewAiTech,
-    title: 'Breaking News New AI Technology Unveiled at Global Conference',
+    label: 'Breaking News',
+    title: 'New AI Technology Unveiled at Global Conference',
     description: 'A leading technology company has announced a new AI platform designed to improve business efficiency and accelerate digital innovation worldwide.',
   }
 ];
@@ -486,22 +486,23 @@ const newsBlue = [
 ]
 function HomePage() {
 
-  const Card = ({ icon, title, description, publicAndType, className, iconClass }) => (
+  const Card = ({ icon, label, title, description, publicAndType, className, iconClass }) => (
     <div className={className}>
       {icon && <img src={icon} className={iconClass} alt={title} />}
-      <h3 className="titleCard">{title}</h3>
-      <p className="discriptionCard">{description}</p>
-      <p className="publicAndTypeCard">{publicAndType}</p>
+      {label && <p className="cardLabel">{label}</p>}
+      <h3 className="cardTitle">{title}</h3>
+      <p className="cardDescription">{description}</p>
+      {publicAndType && <p className="cardMeta">{publicAndType}</p>}
     </div>
   );
 
   const CardType = ({ icon, title, type, description, publicAndType, className, iconClass }) => (
     <div className={className}>
       {icon && <img src={icon} className={iconClass} alt={title} />}
-      <h3 className="typeCard">{type}</h3>
-      <h3 className="titleCard">{title}</h3>
-      <p className="discriptionCard">{description}</p>
-      <p className="publicAndTypeCard">{publicAndType}</p>
+      <h3 className="cardType">{type}</h3>
+      <h3 className="cardTitle">{title}</h3>
+      <p className="cardDescription">{description}</p>
+      <p className="cardMeta">{publicAndType}</p>
     </div>
   );
 
@@ -509,9 +510,11 @@ function HomePage() {
   const CardAudio = ({ icon, title, description, time, className, iconClass }) => (
     <div className={className}>
       <img src={icon} className={iconClass} alt={title} />
-      <p className="discriptionCard">{description}</p>
-      <h3 className="titleCard">{title}</h3>
-      <p className="time">{time}</p>
+      <div className="audioCardContent">
+        <p className="audioCardDescription">{description}</p>
+        <h3 className="audioCardTitle">{title}</h3>
+        <p className="audioCardTime">{time}</p>
+      </div>
     </div>
   );
 
@@ -522,9 +525,9 @@ function HomePage() {
       <div className={className}>
         {!bottomImage && <img src={icon} className={iconClass} alt={title} />}
 
-        <h3 className="titleCard">{title}</h3>
-        <p className="discriptionCard">{description}</p>
-        <p className="publicAndTypeCard">{publicAndType}</p>
+        <h3 className="cardTitle">{title}</h3>
+        <p className="cardDescription">{description}</p>
+        <p className="cardMeta">{publicAndType}</p>
 
         {bottomImage && <img src={icon} className={iconClass} alt={title} />}
       </div>
@@ -534,180 +537,204 @@ function HomePage() {
   const CardOOH = ({ icon, title, description, publicAndType, iconType, className, iconClass }) => (
     <div className={className}>
       {icon && <img src={icon} className={iconClass} alt={title} />}
-      <h3 className="titleCard">{title}</h3>
-      <p className="discriptionCard">{description}</p>
+      <h3 className="cardTitle">{title}</h3>
+      <p className="cardDescription">{description}</p>
       {iconType && <img src={iconType} className={iconClass} alt={title} />}
-      <p className="publicAndTypeCard">{publicAndType}</p>
+      <p className="cardMeta">{publicAndType}</p>
     </div>
   );
 
 
   return (
     <div className="homePage">
-      <div className="hedSection">
-        <section className="cardHed">
-          <div className="miniHedCardConteiner">
-            {cardNewsHed.map(({ id, ...props }) => (
-              <Card key={id} {...props} className="card" iconClass="iconCard" />
+      <div className="heroSection">
+        <section className="heroSectionContainer">
+          <div className="heroNewsColumn">
+            {cardNewsHed.map((item, index) => (
+              <Card key={item.id ?? index} {...item} className="heroNewsCard" iconClass="heroNewsCardImage" />
             ))}
           </div>
-          <div className="bigHedCardConteiner">
-            {cardNewsHedBig.map(({ id, ...props }) => (
-              <Card key={id} {...props} className="bigCard" iconClass="bigIconHed" />
+
+          <div className="heroMainColumn">
+            {cardNewsHedBig.map((item, index) => (
+              <Card key={item.id ?? index} {...item} className="heroMainCard" iconClass="heroMainCardImage" />
             ))}
           </div>
-          <div className="textCardConteiner">
-            {cardNewsHedText.map(({ id, ...props }) => (
-              <Card key={id} {...props} className="miniTextCard" />
+
+          <div className="heroSidebarColumn">
+            {cardNewsHedText.map((item, index) => (
+              <Card key={item.id ?? index} {...item} className="heroTextCard" />
             ))}
           </div>
         </section>
       </div>
 
-      <div className="onlyForGbcSection">
-        <div className="titleSectionContainer">
-          <h2 className="titleSection">ONLY FROM THE GBC</h2>
+      <div className="exclusiveNewsSection">
+        <div className="sectionHeader">
+          <h2 className="sectionTitle">ONLY FROM THE GBC</h2>
         </div>
-        <section className="cardForGbc">
-          <div className="cardFor">
+
+        <section className="exclusiveNewsWrapper">
+          <div className="exclusiveNewsGrid">
             {cardOnlyFromTheGBC.map(({ id, ...props }) => (
-              <Card key={id} {...props} className="cardOnlyGbc" iconClass="iconOnlyCard" />
+              <Card key={id} {...props} className="exclusiveNewsCard" iconClass="exclusiveNewsImage" />
             ))}
           </div>
         </section>
       </div>
 
-      <div className="recAudioSection">
-        <div className="titleSectionContainer">
-          <h2 className="titleSection">RECOMMENDED AUDIO</h2>
+      <div className="recommendedAudioSection">
+        <div className="sectionTitleContainer">
+          <h2 className="sectionTitle">RECOMMENDED AUDIO</h2>
         </div>
-        <section className="cardRecAudio">
-          <div className="cardAudioConteiner">
+
+        <section className="audioSectionWrapper">
+          <div className="audioCardsContainer">
             {recAudio.map(({ id, ...props }) => (
-              <CardAudio key={id} {...props} className="cardRecAudio" iconClass="iconAudioCard" />
-            ))};
+              <CardAudio key={id} {...props} className="audioCard" iconClass="audioCardImage" />
+            ))}
           </div>
         </section>
       </div>
 
-      <div className="newsBodySection">
-        <section className="newsBody">
-          <div className="minicardBody">
+      <div className="topStoriesSection">
+        <section className="topStoriesContainer">
+          <div className="smallStoriesColumn">
             {cardNewsBody.map(({ id, ...props }) => (
-              <Card key={id} {...props} className="miniCardBody" iconClass="iconCard" />
+              <Card key={id} {...props} className="storyCard" iconClass="storyCardImage" />
             ))}
           </div>
-          <div className="bigCardBody">
+
+          <div className="featuredStoryCard">
             {cardNewsBodyBig.map(({ id, ...props }) => (
-              <Card key={id} {...props} className="bigCardBody" iconClass="bigIconCard" />
+              <Card key={id} {...props} className="featuredStoryCard" iconClass="featuredStoryImage" />
             ))}
           </div>
-          <div className="miniTypeCardBodyConteiner">
+
+          <div className="secondaryStoriesColumn">
             {cardNewsBodyType.map(({ id, ...props }) => (
-              <CardBody key={id} id={id} {...props} className="bigCardBody" iconClass="bigIconCard" />
+              <CardBody
+                key={id}
+                id={id}
+                {...props}
+                className="featuredStoryCard"
+                iconClass="featuredStoryImage"
+              />
             ))}
           </div>
         </section>
       </div>
-      <div className="newsBodyChapterTwo">
-        <section className="newsChapterTwo">
-          <div className="cardChapterConteiner">
+
+      <div className="latestNewsSection">
+        <section className="latestNewsContainer">
+          <div className="latestNewsGrid">
             {cardNewsBodyChapterTwo.map(({ id, ...props }) => (
-              <Card key={id} {...props} className="miniCardBody" iconClass="iconCard" />
+              <Card key={id} {...props} className="storyCard" iconClass="storyCardImage" />
             ))}
           </div>
         </section>
       </div>
-      <div className="bigBigBody">
-        <section className="cardBigBigBody">
-          <div className="cardBigOneConteiner">
+
+      <div className="highlightedStoriesSection">
+        <section className="highlightedStoriesContainer">
+          <div className="highlightedMainStory">
             {cardNewsBigBigBody.map(({ id, ...props }) => (
-              <Card key={id} {...props} className="miniCardBody" iconClass="iconCard" />
+              <Card key={id} {...props} className="storyCard" iconClass="storyCardImage" />
             ))}
           </div>
-          <div className="cardBigBodyConteiner">
+
+          <div className="highlightedStoriesGrid">
             {cardNewsBigBody.map(({ id, ...props }) => (
-              <Card key={id} {...props} className="miniCardBody" iconClass="iconCard" />
+              <Card key={id} {...props} className="storyCard" iconClass="storyCardImage" />
             ))}
           </div>
         </section>
       </div>
-      <div className="UnitedNation">
-        <section className="cardUnitedNation">
-          <div className="cardUnitedContainer">
+
+      <div className="unitedNationsSection">
+        <section className="unitedNationsWrapper">
+          <div className="unitedNationsContent">
             {cardNewsOOH.map(({ id, ...props }) => (
-              <CardOOH key={id} {...props} className="miniCardBody" iconClass="iconCard" />
+              <CardOOH key={id} {...props} className="storyCard" iconClass="storyCardImage" />
             ))}
           </div>
         </section>
       </div>
-      <div className="NewsThree">
-        <section className="cardThree">
-          <div className="cardThreeContainer">
+
+      <div className="featuredArticlesSection">
+        <section className="featuredArticlesWrapper">
+          <div className="featuredArticlesGrid">
             {cardNewsThree.map(({ id, ...props }) => (
-              <Card key={id} {...props} className="miniCardBody" iconClass="iconCard" />
+              <Card key={id} {...props} className="storyCard" iconClass="storyCardImage" />
             ))}
           </div>
         </section>
       </div>
-      <div className="mediaLib">
-        <section className="cardMediaLib">
-          <div className="cardMediaLibContainer">
+
+      <div className="mediaLibrarySection">
+        <section className="mediaLibraryWrapper">
+          <div className="mediaLibraryGrid">
             {mediaLib.map(({ id, ...props }) => (
-              <Card key={id} {...props} className="miniCardBody" iconClass="iconCard" />
+              <Card key={id} {...props} className="storyCard" iconClass="storyCardImage" />
             ))}
           </div>
         </section>
-        <div className="titleSectionContainer">
-          <h2 className="titleMedia">MEDIA LIBRARY</h2>
+
+        <div className="sectionTitleContainer">
+          <h2 className="mediaLibraryTitle">MEDIA LIBRARY</h2>
         </div>
-      </div >
-      <div className="NewsInterval">
-        <section className="cardNewsInterval">
-          <div className="cardNewsIntervalContainer">
+      </div>
+
+      <div className="newsHighlightsSection">
+        <section className="newsHighlightsWrapper">
+          <div className="newsHighlightsGrid">
             {cardNewsInterval.map(({ id, ...props }) => (
-              <Card key={id} {...props} className="miniCardBody" iconClass="iconCard" />
+              <Card key={id} {...props} className="storyCard" iconClass="storyCardImage" />
             ))}
           </div>
         </section>
       </div>
-      <div className="cardNewsIntervalTwo">
-        <section className="NewsIntervalTwo">
-          <div className="cardNewsIntervalTwoContainer">
+
+      <div className="additionalNewsSection">
+        <section className="additionalNewsWrapper">
+          <div className="additionalNewsGrid">
             {cardNewsIntervalTwo.map(({ id, ...props }) => (
-              <Card key={id} {...props} className="miniCardBody" iconClass="iconCard" />
+              <Card key={id} {...props} className="storyCard" iconClass="storyCardImage" />
             ))}
           </div>
         </section>
       </div>
-      <div className="globalDefNews">
-        <section className="cardGlobalDefNews">
-          <div className="cardGlobalDefNewsContainer">
+
+      <div className="globalDefenseSection">
+        <section className="globalDefenseWrapper">
+          <div className="globalDefenseContent">
             {globalDefNews.map(({ id, ...props }) => (
-              <CardOOH key={id} {...props} className="miniCardBody" iconClass="iconCard" />
+              <CardOOH key={id} {...props} className="storyCard" iconClass="storyCardImage" />
             ))}
           </div>
         </section>
       </div>
-      <div className="newsType">
-        <section className="cardNewsType">
-          <div className="cardNewsTypeContainer">
+
+      <div className="categoryNewsSection">
+        <section className="categoryNewsWrapper">
+          <div className="categoryNewsGrid">
             {newsNewType.map(({ id, ...props }) => (
-              <CardType key={id} {...props} className="miniCardBody" iconClass="iconCard" />
+              <CardType key={id} {...props} className="storyCard" iconClass="storyCardImage" />
             ))}
           </div>
         </section>
       </div>
-      <div className="newsBlue">
-        <section className="cardBlue">
-          <div className="cardBlueContainer">
+
+      <div className="latestUpdatesSection">
+        <section className="latestUpdatesWrapper">
+          <div className="latestUpdatesGrid">
             {newsBlue.map(({ id, ...props }) => (
-              <Card key={id} {...props} className="miniCardBody" iconClass="iconCard" />
+              <Card key={id} {...props} className="storyCard" iconClass="storyCardImage" />
             ))}
           </div>
         </section>
       </div>
-    </div >
+    </div>
   );
 }
 
